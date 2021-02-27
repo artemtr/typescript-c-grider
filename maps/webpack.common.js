@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-module.exports  =  {
+module.exports = {
     entry: {
         myApp: "./src/index.ts"
     },
@@ -11,9 +11,10 @@ module.exports  =  {
         path: path.resolve(__dirname, 'prod'),
     },
     plugins: [
-        new CleanWebpackPlugin({cleanStaleWebpackAssets: false}),
+        new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
         new HtmlWebpackPlugin({
             title: 'Development',
+            template: "./src/index.html"
         })
     ],
     module: {
@@ -27,10 +28,10 @@ module.exports  =  {
                 use: 'ts-loader',
                 exclude: /node_modules/,
             }
-            ]
+        ]
     },
     resolve: {
-        extensions: [ '.tsx', '.ts', '.js' ],
+        extensions: ['.tsx', '.ts', '.js'],
     }
 
 };

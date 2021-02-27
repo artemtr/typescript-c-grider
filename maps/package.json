@@ -4,6 +4,7 @@
   "description": "",
   "sideEffects": false,
   "dependencies": {
+    "chokidar": "^2.1.8",
     "lodash": "^4.17.20"
   },
   "devDependencies": {

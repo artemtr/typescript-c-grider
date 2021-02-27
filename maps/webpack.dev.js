@@ -5,9 +5,11 @@ module.exports = merge(common, {
     mode: 'development',
     devtool: 'eval-source-map',
     devServer: {
-        contentBase: './prod',
-        hot: true,
-        port: 7098
+        contentBase: "./prod",
+        watchContentBase: true,
+        port: 8027,
+
+
     },
     optimization: {
         runtimeChunk: 'single',
