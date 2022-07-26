@@ -1,0 +1,14 @@
+{
+  "devDependencies": {
+    "@typescript-eslint/parser": "^5.30.7"
+  },
+  "dependencies": {
+    "concurrently": "^7.3.0",
+    "nodemon": "^2.0.19"
+  },
+  "scripts": {
+    "run-tsc": "tsc -w",
+    "run-nodemone": "nodemon ./build/index.js",
+    "start": "concurrently npm:run-*"
+  }
+}
