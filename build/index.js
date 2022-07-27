@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
+const Countable_1 = require("./Countable");
 let fileContent = fs_1.default
     .readFileSync('./football.csv', {
     encoding: 'utf-8',
@@ -12,14 +13,33 @@ let fileContent = fs_1.default
     .map((item) => {
     return item.split(',');
 });
-let count = 0;
-let MunUMathes = fileContent.filter(item => {
-    return item.includes('Man United');
-});
-console.log(MunUMathes);
-MunUMathes.map(item => {
-    if (item.includes('A')) {
-        count++;
+class Footbal extends Countable_1.Countable {
+    data;
+    team;
+    homeWin;
+    awayWin;
+    draw;
+    count = 0;
+    constructor(data, team, homeWin, awayWin, draw) {
+        super();
+        this.data = data;
+        this.team = team;
+        this.homeWin = homeWin;
+        this.awayWin = awayWin;
+        this.draw = draw;
     }
-});
-console.log(count);
+}
+const footbal = new Footbal(fileContent, 'Man United', 'H', 'A', 'D');
+function count(teams) {
+    teams.data
+        .filter((item) => {
+        return item.includes(teams.team);
+    })
+        .map((item) => {
+        if (item.includes(teams.homeWin)) {
+            teams.count++;
+        }
+    });
+}
+count(footbal);
+console.log(footbal.count);

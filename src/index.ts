@@ -1,4 +1,5 @@
 import fs from 'fs'
+import {Countable} from './Countable'
 let fileContent = fs
   .readFileSync('./football.csv', {
     encoding: 'utf-8',
@@ -8,16 +9,33 @@ let fileContent = fs
     return item.split(',')
   })
 
-let count: number = 0
-
-let MunUMathes = fileContent.filter(item => {
-  return item.includes('Man United')
-})
-console.log(MunUMathes)
-
-MunUMathes.map(item => {
-  if (item.includes('A')) {
-    count++
+class Footbal extends Countable {
+  count: number = 0
+  constructor(
+    public data: string[][],
+    public team: string,
+    public homeWin: number | string,
+    public awayWin: number | string,
+    public draw: number | string,
+  ) {
+    super()
   }
-})
-console.log(count)
+}
+
+const footbal = new Footbal(fileContent, 'Man United', 'H', 'A', 'D')
+
+function count(teams: any) {
+  teams.data
+    .filter((item: string[]) => {
+      return item.includes(teams.team)
+    })
+    .map((item: string[]) => {
+      if (item.includes(teams.homeWin)) {
+        teams.count++
+      }
+    })
+}
+
+count(footbal)
+
+console.log(footbal.count)
