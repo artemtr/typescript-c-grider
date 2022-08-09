@@ -1,8 +1,10 @@
+import {Collection} from './models/Collection'
 import {User} from './models/User'
+import {UserProps} from './models/Model'
 
-const user = User.buildUser({id: 4, name: 'Hon', age: 56})
-
-user.on('change', () => {
-  console.log('woek')
+const collection = User.buildUserCollection()
+collection.on('change', () => {
+  console.log('collection changed')
 })
-user.trigger('change')
+
+collection.fetchAll()
