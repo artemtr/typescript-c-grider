@@ -4,12 +4,13 @@
   },
   "dependencies": {
     "@types/node": "^18.6.1",
+    "axios": "^0.27.2",
     "concurrently": "^7.3.0",
     "nodemon": "^2.0.19"
   },
   "scripts": {
-    "run-tsc": "tsc -w",
-    "run-nodemone": "nodemon ./build/index.js",
+    "run-server": "json-server -w db.json",
+    "run-nodemon": "parcel index.html",
     "start": "concurrently npm:run-*"
   }
 }
