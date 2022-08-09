@@ -24,6 +24,7 @@ export class Collection<UserProps, User> {
         this.models.push(this.deserialize(value))
       })
       this.trigger('change')
+      console.log(this.models)
     })
   }
 }
