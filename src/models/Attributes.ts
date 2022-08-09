@@ -1,14 +1,18 @@
-import {UserProps} from './User'
+import {UserProps} from './Model'
 
 export default class Attributes<T> {
   constructor(private data: T) {}
-  get<K extends keyof T>(key: K): T[K] {
-    // @ts-ignore
-    return this.data[propName]
+
+  get = <K extends keyof T>(key: K): T[K] => {
+    return this.data[key]
   }
 
-  set(update: T): void {
+  set = (update: T): void => {
     // @ts-ignore
     Object.assign(this.data, update)
+  }
+
+  getAll = (): T => {
+    return this.data
   }
 }

@@ -1,5 +1,4 @@
 type Callback = () => void
-
 export default class Eventing {
   private events: {[key: string]: Callback[]} = {}
   on = (eventName: string, callback: Callback): void => {
