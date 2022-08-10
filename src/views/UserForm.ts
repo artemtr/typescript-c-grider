@@ -1,56 +1,43 @@
 import {User} from '../models/User'
-export class UserForm {
-  constructor(public parent, public model: User) {
-    this.model.on('change', () => {
-      this.render()
-    })
-  }
-
+import {View} from './View'
+import {Model, UserProps} from '../models/Model'
+export class UserForm extends View<User, UserProps> {
   setAge = (): void => {
     this.model.setRandomAge()
   }
 
+  saveModel = (): void => {
+    this.model.save()
+  }
+
   setName = (): void => {
-    const name = document.getElementById('name-feild').value
-    this.model.setName(name)
+    const input = document.getElementById(
+      'name-feild',
+    ) as HTMLInputElement | null
+
+    if (input) {
+      const name = input.value
+      this.model.setName(name)
+    }
   }
 
   eventsMap(): {[key: string]: () => void} {
     return {
       'click:.set-age': this.setAge,
       'click:.set-name': this.setName,
+      'click:.save': this.saveModel,
     }
   }
 
-  bindEvents(fragment: DocumentFragment): void {
-    const eventsMap = this.eventsMap()
-    for (let eventKey in eventsMap) {
-      const [eventName, selector] = eventKey.split(':')
-      fragment.querySelectorAll(selector).forEach(element => {
-        element.addEventListener(eventName, eventsMap[eventKey])
-      })
-    }
-  }
   template(): string {
     return `
     <div>
-    <h2>User form</h2>
-    <div>User name: ${this.model.get('name')}</div>
-    <div>User age: ${this.model.get('age')}</div>
-    <input type=text />
-    <button>Click</button>
+    <input placeholder="${this.model.get('name')}">
     <button class="set-age">Set random age</button>
     <input type=text id="name-feild" />
     <button class="set-name">Set name</button>
     </div>
+    <button class="save">Save</button>
     `
-  }
-
-  render(): void {
-    this.parent.innerHTML = ''
-    const templateElement = document.createElement('template')
-    templateElement.innerHTML = this.template()
-    this.bindEvents(templateElement.content)
-    this.parent.append(templateElement.content)
   }
 }
