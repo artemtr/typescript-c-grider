@@ -14,14 +14,14 @@ export class UserEdit extends View<User, UserProps> {
 
   onRender(): void {
     // do our nesting
-    new UserShow(this.regions.UserShow, this.model).render()
-    new UserForm(this.regions.UserForm, this.model).render()
+    new UserShow(this.regions.userShow, this.model).render()
+    new UserForm(this.regions.userForm, this.model).render()
   }
   template(): string {
     return `
       <div>
-      <div class="user-show"></div>
-      <div class="user-form"></div>
+      <div class="user-show">show</div>
+      <div class="user-form">form</div>
       </div>
       `
   }

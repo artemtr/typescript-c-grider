@@ -4915,7 +4915,7 @@ var View = /*#__PURE__*/function () {
   }, {
     key: "render",
     value: function render() {
-      this.parent.innerHTML = '';
+      this.parent.innerHTML = ' ';
       var templateElement = document.createElement('template');
       templateElement.innerHTML = this.template();
       this.bindEvents(templateElement.content);
@@ -5153,13 +5153,13 @@ var UserEdit = /*#__PURE__*/function (_View_1$View) {
     key: "onRender",
     value: function onRender() {
       // do our nesting
-      new UserShow_1.UserShow(this.regions.UserShow, this.model).render();
-      new UserForm_1.UserForm(this.regions.UserForm, this.model).render();
+      new UserShow_1.UserShow(this.regions.userShow, this.model).render();
+      new UserForm_1.UserForm(this.regions.userForm, this.model).render();
     }
   }, {
     key: "template",
     value: function template() {
-      return "\n      <div>\n      <div class=\"user-show\"></div>\n      <div class=\"user-form\"></div>\n      </div>\n      ";
+      return "\n      <div>\n      <div class=\"user-show\">show</div>\n      <div class=\"user-form\">form</div>\n      </div>\n      ";
     }
   }]);
 
@@ -5217,7 +5217,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41531" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35195" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
