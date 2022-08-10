@@ -1,13 +1,24 @@
+import {User} from '../models/User'
 export class UserForm {
-  constructor(public parent) {}
+  constructor(public parent, public model: User) {
+    this.model.on('change', () => {
+      this.render()
+    })
+  }
 
-  onButtonCLick(): void {
-    console.log('Hi there')
+  setAge = (): void => {
+    this.model.setRandomAge()
+  }
+
+  setName = (): void => {
+    const name = document.getElementById('name-feild').value
+    this.model.setName(name)
   }
 
   eventsMap(): {[key: string]: () => void} {
     return {
-      'click:button': this.onButtonCLick,
+      'click:.set-age': this.setAge,
+      'click:.set-name': this.setName,
     }
   }
 
@@ -24,15 +35,19 @@ export class UserForm {
     return `
     <div>
     <h2>User form</h2>
-    
+    <div>User name: ${this.model.get('name')}</div>
+    <div>User age: ${this.model.get('age')}</div>
     <input type=text />
     <button>Click</button>
-  
+    <button class="set-age">Set random age</button>
+    <input type=text id="name-feild" />
+    <button class="set-name">Set name</button>
     </div>
     `
   }
 
   render(): void {
+    this.parent.innerHTML = ''
     const templateElement = document.createElement('template')
     templateElement.innerHTML = this.template()
     this.bindEvents(templateElement.content)
