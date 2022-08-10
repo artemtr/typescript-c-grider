@@ -3,7 +3,8 @@ import {View} from './View'
 import {Model, UserProps} from '../models/Model'
 export class UserForm extends View<User, UserProps> {
   setAge = (): void => {
-    this.model.setRandomAge()
+    const age = Math.random()
+    this.model.set({age})
   }
 
   saveModel = (): void => {
@@ -17,7 +18,7 @@ export class UserForm extends View<User, UserProps> {
 
     if (input) {
       const name = input.value
-      this.model.setName(name)
+      this.model.set({name})
     }
   }
 
