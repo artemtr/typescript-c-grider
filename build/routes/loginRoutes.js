@@ -25,17 +25,6 @@ router.get('/', (req, res) => {
   <a href="/login">Log in</a>
   `);
 });
-router.get('/login', (req, res) => {
-    res.send(`
-  <form method="POST">
-  <label>Email</label>
-  <input type="text" name="email">
-  <label>Password</label>
-  <input type="password" name="password">
-  <button>Submit</button>
-  </form>
-  `);
-});
 router.post('/login', (req, res) => {
     const { email, password } = req.body;
     if (email && password) {
@@ -47,17 +36,7 @@ router.post('/login', (req, res) => {
         res.send('Invalid email or pass');
     }
 });
-router.post('/login', (req, res) => {
-    const { email, password } = req.body;
-    if (email && password) {
-        // mark this person as logged in
-        req.session = { loggedIn: true };
-        res.redirect('/');
-    }
-    else {
-        res.send('Invalid email or pass');
-    }
-});
+router.post('/login', (req, res) => { });
 router.get('/logout', (req, res) => {
     req.session = undefined;
     res.redirect('/');
